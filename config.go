@@ -16,6 +16,7 @@ func GetConsulConfig(host string, port int64, prefix string) (config.Config, err
 		consul.WithPrefix(prefix),
 		//是否移除前缀,设置为true,表示可以不带前缀直接获取对应位置
 		consul.StripPrefix(true),
+		
 	)
 	//配置初始化
 	conf, err := config.NewConfig()
