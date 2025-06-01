@@ -1,6 +1,8 @@
 package common
 
 import (
+	"fmt"
+	"path/filepath"
 	"go.uber.org/zap"                  // Zap 核心日志库[1,3,5](@ref)
 	"go.uber.org/zap/zapcore"          // Zap 核心编码和输出控制[1,5](@ref)
 	"gopkg.in/natefinch/lumberjack.v2" // 日志切割归档库[4,7,8](@ref)
@@ -12,7 +14,8 @@ var (
 
 func init() {
 	fileName := "micro.log" // 日志文件名[4,7](@ref)
-
+	logDir, _ := filepath.Abs(fileName)
+	fmt.Println("日志绝对路径:", logDir)
 	// 配置 Lumberjack 日志切割
 	syncWriter := zapcore.AddSync(&lumberjack.Logger{
 		Filename:   fileName, // 日志文件路径
