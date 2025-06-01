@@ -2,10 +2,10 @@ package common
 
 import (
 	"fmt"
-	"path/filepath"
 	"go.uber.org/zap"                  // Zap 核心日志库[1,3,5](@ref)
 	"go.uber.org/zap/zapcore"          // Zap 核心编码和输出控制[1,5](@ref)
 	"gopkg.in/natefinch/lumberjack.v2" // 日志切割归档库[4,7,8](@ref)
+	"path/filepath"
 )
 
 var (
@@ -77,4 +77,9 @@ func Panicf(format string, args ...interface{}) {
 }
 func Fatalf(format string, args ...interface{}) {
 	logger.Fatalf(format, args...)
+}
+func Sync() {
+	if logger != nil {
+		logger.Sync() // 刷新缓冲区[2,5](@ref)
+	}
 }
